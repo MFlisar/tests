@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int createSubActivityButtons(MainActivityBinding binding) {
         int activities = 0;
-        int dp1 = (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
         try {
             ActivityInfo[] list = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES).activities;
             activities = list.length - 1;
@@ -37,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     tv.setTag(info);
                     tv.setText(info.loadLabel(getPackageManager()));
                     tv.setOnClickListener(this);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    lp.setMargins(dp1 * 4, dp1 * 4, dp1 * 4, dp1 * 4);
                     binding.llActivities.addView(tv);
                 }
             }
