@@ -1,13 +1,14 @@
-package com.michaelflisar.tests;
+package com.michaelflisar.tests.tests;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.michaelflisar.tests.R;
+import com.michaelflisar.tests.base.BaseTestActivity;
 import com.michaelflisar.tests.databinding.TestAutoFitTextViewActivityBinding;
 
-public class TestAutoFitTextViewActivity extends AppCompatActivity {
+public class TestAutoFitTextViewActivity extends BaseTestActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
