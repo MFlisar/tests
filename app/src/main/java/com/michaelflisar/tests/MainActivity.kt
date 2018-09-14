@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.michaelflisar.tests.databinding.MainActivityBinding
 import com.michaelflisar.tests.tests.RxMapTest
 import java.util.*
@@ -21,29 +22,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    lateinit var binding: MainActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
+        binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
 
-        val activities = createSubActivityButtons(binding)
-        binding.tvInfo.text = String.format("Existing MCVE Tests: %d", activities)
+        val testCases = createSubActivityButtons() + FUNCTIONS.size
+        createFunctionTestButtons()
 
-        val functions = createFunctionTestButtons(binding)
-        binding.tvInfo2.setText(String.format("Existing Function Tests: %d", functions))
+        binding.tvInfo.text = String.format("Existing MCVE Tests: %d", testCases)
     }
 
-    private fun createSubActivityButtons(binding: MainActivityBinding): Int {
+    private fun createSubActivityButtons(): Int {
+
         var activities = 0
         try {
             val list = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities
             activities = list.size - 1
+
+            addHeader("Activities $activities")
+
             for (info in list) {
                 if (info.name != MainActivity::class.java.name) {
-                    val tv = layoutInflater.inflate(R.layout.main_activity_list_item, binding.llActivities, false) as TextView
-                    tv.tag = info
-                    tv.text = info.loadLabel(packageManager)
-                    tv.setOnClickListener(this)
-                    binding.llActivities.addView(tv)
+                    addItem(info.loadLabel(packageManager).toString(), info)
                 }
             }
         } catch (e: PackageManager.NameNotFoundException) {
@@ -53,16 +55,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         return activities
     }
 
-    private fun createFunctionTestButtons(binding: MainActivityBinding): Int {
+    private fun createFunctionTestButtons() {
+        addHeader("Functions (${FUNCTIONS.size})")
         for (i in 0..FUNCTIONS.size - 1) {
-            val tv = layoutInflater.inflate(R.layout.main_activity_list_item, binding.llActivities, false) as TextView
-            tv.tag = i
-            tv.setText(FUNCTIONS[i].first)
-            tv.setOnClickListener(this)
-            binding.llFunctions.addView(tv)
+            addItem(FUNCTIONS[i].first, i)
         }
-        return FUNCTIONS.size
     }
+
+    private fun addHeader(label: String) {
+        val tv = layoutInflater.inflate(R.layout.main_activity_list_header_item, binding.llTests, false) as TextView
+        tv.setText(label)
+        binding.llTests.addView(tv)
+    }
+
+    private fun addItem(label: String, tag: Any) {
+        val tv = layoutInflater.inflate(R.layout.main_activity_list_item, binding.llTests, false) as TextView
+        tv.tag = tag
+        tv.setText(label)
+        tv.setOnClickListener(this)
+        binding.llTests.addView(tv)
+    }
+
 
     override fun onClick(v: View) {
         // no security checks, we know what we get
@@ -75,6 +88,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             val index = v.tag as Int
             FUNCTIONS[index].second.run()
+
+            Toast.makeText(this, "Function executed: ${FUNCTIONS[index].first}", Toast.LENGTH_SHORT).show()
         }
 
 
