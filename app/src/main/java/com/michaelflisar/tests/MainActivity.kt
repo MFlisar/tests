@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val list = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities
             activities = list.size - 1
 
-            addHeader("Activities $activities")
+            addHeader("Activities ($activities)")
 
             for (info in list) {
                 if (info.name != MainActivity::class.java.name) {
