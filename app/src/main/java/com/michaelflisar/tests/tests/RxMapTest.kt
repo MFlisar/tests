@@ -22,6 +22,7 @@ object RxMapTest {
     // Cached intermediate results
     private val mapRooms : HashMap<House, Observable<List<Room>>> = HashMap()
 
+    // maybe the caching is making a difference???
     private val USE_CACHE = true
 
     fun testDelete() {
