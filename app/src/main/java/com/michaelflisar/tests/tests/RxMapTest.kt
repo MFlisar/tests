@@ -1,6 +1,7 @@
 package com.michaelflisar.tests.tests
 
 import android.util.Log
+import com.jakewharton.rx.replayingShare
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.Relay
 import io.reactivex.Observable
@@ -15,37 +16,43 @@ object RxMapTest {
     class Room(val name: String)
 
     // Relays that hold all houses and all rooms
-    private val storeRelayHouses: Relay<List<House>> = BehaviorRelay.create<List<House>>().toSerialized()
-    private val storeRelayRooms: Relay<List<Room>> = BehaviorRelay.create<List<Room>>().toSerialized()
+    private val relayHouses: Relay<List<House>> = BehaviorRelay.create<List<House>>().toSerialized()
+    private val relayRooms: Relay<List<Room>> = BehaviorRelay.create<List<Room>>().toSerialized()
+
+    // Cached intermediate results
+    private val mapRooms : HashMap<House, Observable<List<Room>>> = HashMap()
+
+    private val USE_CACHE = true
 
     fun testDelete() {
-        // Test data: 1 house with 3 rooms
-        val houses = listOf(House("House", ArrayList()))
+        // Test data: 1 house with 3 rooms, 1 house without rooms
         val rooms = listOf(Room("Living room"), Room("Bath"), Room("Bedroom"))
-        houses[0].rooms = rooms
+        val houses = listOf(House("House 1", rooms), House("House 2", ArrayList()))
 
         // push data into relays
-        storeRelayHouses.accept(houses)
-        storeRelayRooms.accept(rooms)
+        relayHouses.accept(houses)
+        relayRooms.accept(rooms)
 
-        // test delete with dependencies + update the store relays!
+        // test: delete first house (the one with 3 rooms) incl. dependencies + update the store relays!
         testDeleteHouse(houses[0])
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(Consumer {
                     Log.d("DB", "House AND dependencies deleted - ${Thread.currentThread()}")
 
                     // check stores
-                    storeRelayHouses
-                            .observeOn(Schedulers.io())
-                            .subscribeOn(AndroidSchedulers.mainThread())
+                    relayHouses
+                            .take(1)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(Consumer {
                                 Log.d("DB", "Houses after deletion: ${it.size} - ${Thread.currentThread()}")
                             })
 
-                    storeRelayRooms
-                            .observeOn(Schedulers.io())
-                            .subscribeOn(AndroidSchedulers.mainThread())
+                    relayRooms
+                            .take(1)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(Consumer {
                                 Log.d("DB", "Rooms after deletion: ${it.size} - ${Thread.currentThread()}")
                             })
@@ -53,7 +60,7 @@ object RxMapTest {
     }
 
     fun testDeleteHouse(item: House): Single<List<House>> {
-        return storeRelayHouses
+        return relayHouses
                 .take(1)
                 .flatMapIterable { it }
                 .filter { it.equals(item) }
@@ -62,9 +69,10 @@ object RxMapTest {
                     it
                 }
                 .flatMap { Observable.fromIterable(it.rooms) }
-                .flatMapSingle { testDeleteRoom(it) }
+                .flatMapSingle { testDeleteRoom(item, it) }
                 .toList()
                 .map {
+                    Thread.sleep(500)
                     Log.d("DB", "Deleting house (${item.name}) - ${Thread.currentThread()}")
                     it
                 }
@@ -74,7 +82,7 @@ object RxMapTest {
                 }
                 .map { item }
                 .flatMap {
-                    storeRelayHouses
+                    relayHouses
                             .take(1)
                             .flatMapIterable { it }
                             .filter { !it.equals(item) }
@@ -84,15 +92,27 @@ object RxMapTest {
                                 it
                             }
                             .map {
-                                storeRelayHouses.accept(it)
+                                relayHouses.accept(it)
                                 Log.d("DB", "New house list put back into store: ${it.size} - ${Thread.currentThread()}")
                                 it
                             }
                 }
     }
 
-    fun testDeleteRoom(item: Room): Single<List<Room>> {
-        return storeRelayRooms
+    fun testDeleteRoom(house: House, item: Room): Single<List<Room>> {
+        // simplified for testing, this should be like a intermediate result cache backed up by the store
+        var roomObservable: Observable<List<Room>> = relayRooms
+        if (USE_CACHE && mapRooms[house] == null) {
+            mapRooms[house] = relayRooms
+                    .flatMapSingle {
+                        Observable.fromIterable(it)
+                                .filter { house.rooms.contains(it) }
+                                .toList()
+                    }
+                    .replayingShare()
+            roomObservable = mapRooms[house]!!
+        }
+        return roomObservable
                 .take(1)
                 .flatMapIterable { it }
                 .filter { it.equals(item) }
@@ -101,6 +121,7 @@ object RxMapTest {
                     it
                 }
                 .map {
+                    Thread.sleep(500)
                     Log.d("DB", "Deleting room (${it.name}) - ${Thread.currentThread()}")
                     it
                 }
@@ -111,7 +132,7 @@ object RxMapTest {
                 .map { item }
                 .singleOrError()
                 .flatMap {
-                    storeRelayRooms
+                    relayRooms
                             .take(1)
                             .flatMapIterable { it }
                             .filter { !it.equals(item) }
@@ -121,7 +142,11 @@ object RxMapTest {
                                 it
                             }
                             .map {
-                                storeRelayRooms.accept(it)
+                                relayRooms.accept(it)
+                                if (USE_CACHE) {
+                                    // new roomws so we need to clear intermediate results!
+                                    mapRooms.remove(house)
+                                }
                                 Log.d("DB", "New room list put back into store: ${it.size} - ${Thread.currentThread()}")
                                 it
                             }
