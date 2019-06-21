@@ -4,21 +4,22 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.michaelflisar.tests.databinding.MainActivityBinding
-import com.michaelflisar.tests.tests.RxMapTest
+import com.michaelflisar.tests.tests.RxMapTest.RxMapTest
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    internal val FUNCTIONS: ArrayList<Pair<String, Runnable>> = object : ArrayList<Pair<String, Runnable>>() {
+    private val TEST_CASES: ArrayList<Pair<String, Runnable>> = object : ArrayList<Pair<String, Runnable>>() {
         init {
             add(Pair("RxMapTest", Runnable { RxMapTest.testDelete() }))
+            // Activities are handled separately => HAPPENS AUTOMATICALLY!
         }
     }
 
@@ -26,9 +27,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<MainActivityBinding>(this, R.layout.main_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
 
-        val testCases = createSubActivityButtons() + FUNCTIONS.size
+        val testCases = createSubActivityButtons() + TEST_CASES.size
         createFunctionTestButtons()
 
         binding.tvInfo.text = String.format("Existing MCVE Tests: %d", testCases)
@@ -56,9 +57,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun createFunctionTestButtons() {
-        addHeader("Functions (${FUNCTIONS.size})")
-        for (i in 0..FUNCTIONS.size - 1) {
-            addItem(FUNCTIONS[i].first, i)
+        addHeader("Functions (${TEST_CASES.size})")
+        for (i in 0..TEST_CASES.size - 1) {
+            addItem(TEST_CASES[i].first, i)
         }
     }
 
@@ -87,11 +88,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(intent)
         } else {
             val index = v.tag as Int
-            FUNCTIONS[index].second.run()
+            TEST_CASES[index].second.run()
 
-            Toast.makeText(this, "Function executed: ${FUNCTIONS[index].first}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Function executed: ${TEST_CASES[index].first}", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 }

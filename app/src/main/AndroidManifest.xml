@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- Main Activity -->
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,8 +20,13 @@
 
         <!-- Test Activity -->
         <activity
-            android:name=".tests.TestAutoFitTextViewActivity"
+            android:name=".tests.AutoFitTest.TestAutoFitTextViewActivity"
             android:label="AutoFit TextView Test" />
+
+        <activity
+            android:name=".tests.DrawerTest.TestDrawerActivity"
+            android:theme="@style/DrawerTheme"
+            android:label="Drawer Test" />
 
     </application>
 
