@@ -68,10 +68,12 @@ class TestDrawerActivity : BaseTestActivity(false), View.OnClickListener {
         binding.tvLevel.text = "Current state: level = $level"
         if (level == 0) {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            supportActionBar?.setHomeButtonEnabled(true)
             drawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true
             drawer.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         } else {
             drawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false
+            supportActionBar?.setHomeButtonEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             drawer.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
