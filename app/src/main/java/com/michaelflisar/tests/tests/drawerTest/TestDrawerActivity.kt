@@ -1,4 +1,4 @@
-package com.michaelflisar.tests.tests.DrawerTest
+package com.michaelflisar.tests.tests.drawerTest
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -56,7 +56,7 @@ class TestDrawerActivity : BaseTestActivity(false), View.OnClickListener {
     // Functions
     // ------------------
 
-    fun initViews() {
+    private fun initViews() {
         drawer = DrawerBuilder()
                 .withToolbar(binding.toolbar)
                 .withActivity(this)
@@ -64,7 +64,7 @@ class TestDrawerActivity : BaseTestActivity(false), View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    fun updateViews() {
+    private fun updateViews() {
         binding.tvLevel.text = "Current state: level = $level"
         if (level == 0) {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)

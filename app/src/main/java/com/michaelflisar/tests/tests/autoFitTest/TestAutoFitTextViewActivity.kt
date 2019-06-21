@@ -1,4 +1,4 @@
-package com.michaelflisar.tests.tests.AutoFitTest
+package com.michaelflisar.tests.tests.autoFitTest
 
 import android.graphics.Color
 import android.os.Bundle

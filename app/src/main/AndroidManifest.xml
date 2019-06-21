@@ -20,11 +20,11 @@
 
         <!-- Test Activity -->
         <activity
-            android:name=".tests.AutoFitTest.TestAutoFitTextViewActivity"
+            android:name=".tests.autoFitTest.TestAutoFitTextViewActivity"
             android:label="AutoFit TextView Test" />
 
         <activity
-            android:name=".tests.DrawerTest.TestDrawerActivity"
+            android:name=".tests.drawerTest.TestDrawerActivity"
             android:theme="@style/DrawerTheme"
             android:label="Drawer Test" />
 

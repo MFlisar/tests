@@ -1,4 +1,4 @@
-package com.michaelflisar.tests.tests.RxMapTest
+package com.michaelflisar.tests.tests.rxMapTest
 
 import android.util.Log
 import com.jakewharton.rx.replayingShare

@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.michaelflisar.tests.databinding.MainActivityBinding
-import com.michaelflisar.tests.tests.RxMapTest.RxMapTest
+import com.michaelflisar.tests.tests.rxMapTest.RxMapTest
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
