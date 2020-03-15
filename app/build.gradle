@@ -65,5 +65,5 @@ dependencies {
     // ------------------------
 
     implementation "com.mikepenz:fastadapter:${versions.fastAdapter}"
-    implementation "com.mikepenz:materialdrawer:${versions.materialDrawer}"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:${versions.fastAdapter}"
 }

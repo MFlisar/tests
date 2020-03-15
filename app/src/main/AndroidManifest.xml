@@ -24,9 +24,8 @@
             android:label="AutoFit TextView Test" />
 
         <activity
-            android:name=".tests.drawerTest.TestDrawerActivity"
-            android:theme="@style/DrawerTheme"
-            android:label="Drawer Test" />
+            android:name=".tests.fastAdapterExpandableItems.TestExpandableItemActivity"
+            android:label="FastAdapter Expandable Test" />
 
     </application>
 
