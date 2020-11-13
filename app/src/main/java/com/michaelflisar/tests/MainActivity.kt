@@ -5,11 +5,11 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.michaelflisar.tests.databinding.MainActivityBinding
 import com.michaelflisar.tests.tests.rxMapTest.RxMapTest
 import java.util.*
@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+        binding = MainActivityBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
         val testCases = createSubActivityButtons() + TEST_CASES.size
         createFunctionTestButtons()

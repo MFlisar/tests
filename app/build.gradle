@@ -9,7 +9,20 @@ androidExtensions {
 
 android {
     compileSdkVersion setup.compileSdk
-    dataBinding.enabled = setup.enableDataBinding
+
+    buildFeatures {
+        viewBinding setup.enableViewBinding
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     defaultConfig {
         applicationId "com.michaelflisar.tests"
         minSdkVersion setup.minSdk
@@ -21,12 +34,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    android {
-        compileOptions {
-            sourceCompatibility 1.8
-            targetCompatibility 1.8
         }
     }
 
@@ -47,9 +54,10 @@ dependencies {
     // AndroidX
     // ------------------------
 
-    implementation "androidx.appcompat:appcompat:${androidx.appcompat}"
     implementation "androidx.recyclerview:recyclerview:${androidx.recyclerview}"
     implementation "com.google.android.material:material:${androidx.material}"
+    implementation "androidx.core:core-ktx:${androidx.core}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${androidx.lifecycle}"
 
     // ------------------------
     // Rx
@@ -66,4 +74,11 @@ dependencies {
 
     implementation "com.mikepenz:fastadapter:${versions.fastAdapter}"
     implementation "com.mikepenz:fastadapter-extensions-expandable:${versions.fastAdapter}"
+
+    // ------------------------
+    // Coil
+    // ------------------------
+
+    implementation "io.coil-kt:coil:1.0.0"
+    implementation "com.github.Commit451.coil-transformations:transformations:1.0.0"
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.michaelflisar.tests">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,6 +28,10 @@
         <activity
             android:name=".tests.fastAdapterExpandableItems.TestExpandableItemActivity"
             android:label="FastAdapter Expandable Test" />
+
+        <activity
+            android:name=".tests.imageTintTest.ImageTintTestActivity"
+            android:label="Image Tint Test" />
 
     </application>
 

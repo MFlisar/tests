@@ -1,7 +1,7 @@
 package com.michaelflisar.tests.tests.fastAdapterExpandableItems
 
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
+import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.michaelflisar.tests.R
@@ -21,7 +21,8 @@ class TestExpandableItemActivity : BaseTestActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.test_expandable_activity)
+        binding = TestExpandableActivityBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
         initViews(savedInstanceState)
     }
 

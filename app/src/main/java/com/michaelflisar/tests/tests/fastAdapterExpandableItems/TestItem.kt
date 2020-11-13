@@ -1,7 +1,6 @@
 package com.michaelflisar.tests.tests.fastAdapterExpandableItems
 
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import com.michaelflisar.tests.R
 import com.michaelflisar.tests.databinding.ItemTestBinding
 import com.mikepenz.fastadapter.FastAdapter
@@ -41,7 +40,7 @@ class TestItem(
 
     class ViewHolder(view: View) : FastAdapter.ViewHolder<TestItem>(view) {
 
-        var binding: ItemTestBinding = DataBindingUtil.bind(view)!!
+        var binding: ItemTestBinding = ItemTestBinding.bind(view)
 
         override fun bindView(item: TestItem, payloads: List<Any>) {
 

@@ -1,56 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="HardcodedText"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/tvLevel"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:layout_height="wrap_content" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btNextLevel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Go to level 1 - back button will be shown instead of hamburger" />
 
-            <TextView
-                android:id="@+id/tvLevel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Information:"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btNextLevel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onClick"
-                android:text="Go to level 1 - back button will be shown instead of hamburger"
-                />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 0: Show hamburger + drawer active\nLevel 1: Show back button + drawer locked" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Information:"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Level 0: Show hamburger + drawer active\nLevel 1: Show back button + drawer locked"/>
-
-        </LinearLayout>
     </LinearLayout>
-
-</layout>
+</LinearLayout>
