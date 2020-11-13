@@ -24,7 +24,7 @@ class ImageTintTestActivity : BaseTestActivity() {
         val testImage = R.drawable.ic_baseline_mail_outline_24
         val backgroundUrl = "https://wallpaperaccess.com/full/220637.jpg"
         val color = Color.WHITE
-        val mode = PorterDuff.Mode.SRC_ATOP
+        val mode = PorterDuff.Mode.SRC_IN
 
         // set background image to better visualise transparency
         val request = ImageRequest.Builder(this)
@@ -58,7 +58,7 @@ class ImageTintTestActivity : BaseTestActivity() {
             private val mode: PorterDuff.Mode = PorterDuff.Mode.SRC_ATOP
     ) : Transformation {
 
-        override fun key(): String = "5-${ColorTintTransformation::class.java.name}-$mode-$color"
+        override fun key(): String = "${ColorTintTransformation::class.java.name}-$mode-$color"
 
         override suspend fun transform(pool: BitmapPool, input: Bitmap, size: Size): Bitmap {
             val width = input.width
