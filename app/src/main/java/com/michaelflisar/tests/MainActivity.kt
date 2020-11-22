@@ -6,15 +6,15 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.michaelflisar.tests.databinding.MainActivityBinding
+import com.michaelflisar.tests.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding: MainActivityBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = MainActivityBinding.inflate(LayoutInflater.from(this))
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
         addHeader("Functions (${Definitions.TEST_CASES.count { it is Definitions.TestCase.Function }})")
@@ -38,13 +38,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun addHeader(label: String) {
-        val tv = layoutInflater.inflate(R.layout.main_activity_list_header_item, binding.llTests, false) as TextView
+        val tv = layoutInflater.inflate(R.layout.item_test_case_header, binding.llTests, false) as TextView
         tv.text = label
         binding.llTests.addView(tv)
     }
 
     private fun addItem(label: String, tag: Any) {
-        val tv = layoutInflater.inflate(R.layout.main_activity_list_item, binding.llTests, false) as TextView
+        val tv = layoutInflater.inflate(R.layout.item_test_case, binding.llTests, false) as TextView
         tv.tag = tag
         tv.text = label
         tv.setOnClickListener(this)

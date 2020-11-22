@@ -16,12 +16,12 @@ import coil.transform.Transformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.michaelflisar.tests.R
-import com.michaelflisar.tests.databinding.TestImageTintActivityBinding
+import com.michaelflisar.tests.databinding.FragmentImageTintTestBinding
 
 class ImageTintTestFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = TestImageTintActivityBinding.inflate(inflater)
+        val binding = FragmentImageTintTestBinding.inflate(inflater)
 
         val testImage = R.drawable.ic_baseline_mail_outline_24
         val backgroundUrl = "https://wallpaperaccess.com/full/220637.jpg"

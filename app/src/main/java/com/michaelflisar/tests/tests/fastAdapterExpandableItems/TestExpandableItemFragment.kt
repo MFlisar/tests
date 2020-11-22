@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.michaelflisar.tests.databinding.TestExpandableActivityBinding
+import com.michaelflisar.tests.databinding.FragmentExpandableTestBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -15,13 +15,13 @@ import com.mikepenz.fastadapter.expandable.getExpandableExtension
 
 class TestExpandableItemFragment : Fragment() {
 
-    lateinit var binding: TestExpandableActivityBinding
+    lateinit var binding: FragmentExpandableTestBinding
 
     private lateinit var itemAdapter: ItemAdapter<IItem<*>>
     private lateinit var fastAdapter: FastAdapter<IItem<*>>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = TestExpandableActivityBinding.inflate(inflater)
+        binding = FragmentExpandableTestBinding.inflate(inflater)
         initViews(savedInstanceState)
         return binding.root
     }
