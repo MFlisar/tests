@@ -10,6 +10,9 @@ import coil.load
 import coil.request.ImageRequest
 import coil.size.Size
 import coil.transform.Transformation
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.commit451.coiltransformations.ColorFilterTransformation
 import com.michaelflisar.tests.R
 import com.michaelflisar.tests.base.BaseTestActivity
 import com.michaelflisar.tests.databinding.TestImageTintActivityBinding
@@ -47,6 +50,13 @@ class ImageTintTestActivity : BaseTestActivity() {
         binding.iv3.load(testImage) {
             transformations(ColorTintTransformation(color, mode))
         }
+
+        // Variant 4
+        Glide
+                .with(this)
+                .load(testImage)
+                .apply(RequestOptions.bitmapTransform(jp.wasabeef.glide.transformations.ColorFilterTransformation(color)))
+                .into(binding.iv4)
     }
 
     // -------------------
