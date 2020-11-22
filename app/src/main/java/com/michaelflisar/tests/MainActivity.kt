@@ -1,9 +1,5 @@
 package com.michaelflisar.tests
 
-import android.content.ComponentName
-import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,87 +7,56 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.michaelflisar.tests.databinding.MainActivityBinding
-import com.michaelflisar.tests.tests.rxMapTest.RxMapTest
-import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val TEST_CASES: ArrayList<Pair<String, Runnable>> = object : ArrayList<Pair<String, Runnable>>() {
-        init {
-            add(Pair("RxMapTest", Runnable { RxMapTest.testDelete() }))
-            // Activities are handled separately => HAPPENS AUTOMATICALLY!
-        }
-    }
-
-    lateinit var binding: MainActivityBinding
+    private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-        val testCases = createSubActivityButtons() + TEST_CASES.size
+        addHeader("Functions (${Definitions.TEST_CASES.count { it is Definitions.TestCase.Function }})")
         createFunctionTestButtons()
+        addHeader("Fragments (${Definitions.TEST_CASES.count { it is Definitions.TestCase.Fragment }})")
+        createFragmentTestButtons()
 
-        binding.tvInfo.text = String.format("Existing MCVE Tests: %d", testCases)
-    }
-
-    private fun createSubActivityButtons(): Int {
-
-        var activities = 0
-        try {
-            val list = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES).activities
-            activities = list.size - 1
-
-            addHeader("Activities ($activities)")
-
-            for (info in list) {
-                if (info.name != MainActivity::class.java.name) {
-                    addItem(info.loadLabel(packageManager).toString(), info)
-                }
-            }
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
-
-        return activities
+        binding.tvInfo.text = "Existing MCVE Tests: ${Definitions.TEST_CASES.size}"
     }
 
     private fun createFunctionTestButtons() {
-        addHeader("Functions (${TEST_CASES.size})")
-        for (i in 0..TEST_CASES.size - 1) {
-            addItem(TEST_CASES[i].first, i)
+        Definitions.TEST_CASES.filterIsInstance<Definitions.TestCase.Function>().forEach {
+            addItem(it.name, Definitions.TEST_CASES.indexOf(it))
+        }
+    }
+
+    private fun createFragmentTestButtons() {
+        Definitions.TEST_CASES.filterIsInstance<Definitions.TestCase.Fragment>().forEach {
+            addItem(it.name, Definitions.TEST_CASES.indexOf(it))
         }
     }
 
     private fun addHeader(label: String) {
         val tv = layoutInflater.inflate(R.layout.main_activity_list_header_item, binding.llTests, false) as TextView
-        tv.setText(label)
+        tv.text = label
         binding.llTests.addView(tv)
     }
 
     private fun addItem(label: String, tag: Any) {
         val tv = layoutInflater.inflate(R.layout.main_activity_list_item, binding.llTests, false) as TextView
         tv.tag = tag
-        tv.setText(label)
+        tv.text = label
         tv.setOnClickListener(this)
         binding.llTests.addView(tv)
     }
 
 
     override fun onClick(v: View) {
-        // no security checks, we know what we get
-        if (v.tag is ActivityInfo) {
-            val info = v.tag as ActivityInfo
-            val name = ComponentName(info.packageName, info.name)
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.component = name
-            startActivity(intent)
-        } else {
-            val index = v.tag as Int
-            TEST_CASES[index].second.run()
-
-            Toast.makeText(this, "Function executed: ${TEST_CASES[index].first}", Toast.LENGTH_SHORT).show()
-        }
+        val index = v.tag as Int
+        val testCase = Definitions.TEST_CASES[index]
+        testCase.runTest(this)
+        if (testCase is Definitions.TestCase.Function)
+            Toast.makeText(this, "Function executed: ${testCase.name}", Toast.LENGTH_SHORT).show()
     }
 }

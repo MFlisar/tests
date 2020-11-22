@@ -2,28 +2,28 @@ package com.michaelflisar.tests.tests.fastAdapterExpandableItems
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.michaelflisar.tests.R
-import com.michaelflisar.tests.base.BaseTestActivity
 import com.michaelflisar.tests.databinding.TestExpandableActivityBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.expandable.getExpandableExtension
 
-class TestExpandableItemActivity : BaseTestActivity() {
+class TestExpandableItemFragment : Fragment() {
 
     lateinit var binding: TestExpandableActivityBinding
 
     private lateinit var itemAdapter: ItemAdapter<IItem<*>>
     private lateinit var fastAdapter: FastAdapter<IItem<*>>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = TestExpandableActivityBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = TestExpandableActivityBinding.inflate(inflater)
         initViews(savedInstanceState)
+        return binding.root
     }
 
     fun initViews(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class TestExpandableItemActivity : BaseTestActivity() {
         }
 
         // RV
-        binding.rvData.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        binding.rvData.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.rvData.adapter = fastAdapter
 
         // Daten setzen

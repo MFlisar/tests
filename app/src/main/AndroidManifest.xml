@@ -22,16 +22,7 @@
 
         <!-- Test Activity -->
         <activity
-            android:name=".tests.autoFitTest.TestAutoFitTextViewActivity"
-            android:label="AutoFit TextView Test" />
-
-        <activity
-            android:name=".tests.fastAdapterExpandableItems.TestExpandableItemActivity"
-            android:label="FastAdapter Expandable Test" />
-
-        <activity
-            android:name=".tests.imageTintTest.ImageTintTestActivity"
-            android:label="Image Tint Test" />
+            android:name=".tests.TestActivity"  />
 
     </application>
 

@@ -3,7 +3,10 @@ package com.michaelflisar.tests.tests.imageTintTest
 import android.graphics.*
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.ColorInt
+import androidx.fragment.app.Fragment
 import coil.bitmap.BitmapPool
 import coil.imageLoader
 import coil.load
@@ -12,31 +15,27 @@ import coil.size.Size
 import coil.transform.Transformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.commit451.coiltransformations.ColorFilterTransformation
 import com.michaelflisar.tests.R
-import com.michaelflisar.tests.base.BaseTestActivity
 import com.michaelflisar.tests.databinding.TestImageTintActivityBinding
 
-class ImageTintTestActivity : BaseTestActivity() {
+class ImageTintTestFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = TestImageTintActivityBinding.inflate(LayoutInflater.from(this))
-        setContentView(binding.root)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = TestImageTintActivityBinding.inflate(inflater)
 
         val testImage = R.drawable.ic_baseline_mail_outline_24
         val backgroundUrl = "https://wallpaperaccess.com/full/220637.jpg"
-        val color = Color.WHITE
+        val color = Color.RED
         val mode = PorterDuff.Mode.SRC_IN
 
         // set background image to better visualise transparency
-        val request = ImageRequest.Builder(this)
+        val request = ImageRequest.Builder(requireContext())
                 .data(backgroundUrl)
                 .target {
                     binding.root.background = it
                 }
                 .build()
-        imageLoader.enqueue(request)
+        requireContext().imageLoader.enqueue(request)
 
         // Variant 1
         binding.iv1.setImageResource(testImage)
@@ -57,6 +56,8 @@ class ImageTintTestActivity : BaseTestActivity() {
                 .load(testImage)
                 .apply(RequestOptions.bitmapTransform(jp.wasabeef.glide.transformations.ColorFilterTransformation(color)))
                 .into(binding.iv4)
+
+        return binding.root
     }
 
     // -------------------
