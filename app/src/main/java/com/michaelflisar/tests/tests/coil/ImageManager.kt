@@ -100,6 +100,7 @@ object ImageManager {
                 // Workaround wegen issue: https://github.com/coil-kt/coil/issues/567
                 .bitmapPoolingEnabled(false)
                 //.launchInterceptorChainOnMainThread(false)
+                .allowHardware(false)
                 .build()
         Coil.setImageLoader(imageLoader)
     }
