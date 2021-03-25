@@ -1,4 +1,4 @@
-package com.michaelflisar.tests.tests.fastAdapterExpandableItems
+package com.michaelflisar.tests.tests.fastAdapter
 
 import android.view.View
 import com.michaelflisar.tests.R

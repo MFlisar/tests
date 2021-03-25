@@ -2,10 +2,11 @@ package com.michaelflisar.tests
 
 import android.content.Context
 import com.michaelflisar.tests.tests.TestActivity
-import com.michaelflisar.tests.tests.autoFitTest.TestAutoFitTextViewFragment
-import com.michaelflisar.tests.tests.fastAdapterExpandableItems.TestExpandableItemFragment
-import com.michaelflisar.tests.tests.imageTintTest.ImageTintTestFragment
-import com.michaelflisar.tests.tests.rxMapTest.RxMapTest
+import com.michaelflisar.tests.tests.android.TestAutoFitTextViewFragment
+import com.michaelflisar.tests.tests.coil.display.ImageDisplayFragment
+import com.michaelflisar.tests.tests.fastAdapter.TestExpandableItemFragment
+import com.michaelflisar.tests.tests.coil.tinting.ImageTintTestFragment
+import com.michaelflisar.tests.tests.rx.RxMapTest
 
 object Definitions {
 
@@ -16,6 +17,7 @@ object Definitions {
             TestCase.Fragment("AutoFit TextView Test", TestAutoFitTextViewFragment::class.java),
             TestCase.Fragment("FastAdapter Expandable Test", TestExpandableItemFragment::class.java),
             TestCase.Fragment("Image Tint Test", ImageTintTestFragment::class.java),
+            TestCase.Fragment("Image Display Test", ImageDisplayFragment::class.java),
     ).apply {
         sortedBy { it.sortingId }
     }

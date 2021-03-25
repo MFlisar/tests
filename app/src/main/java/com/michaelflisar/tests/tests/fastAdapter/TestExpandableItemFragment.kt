@@ -1,4 +1,4 @@
-package com.michaelflisar.tests.tests.fastAdapterExpandableItems
+package com.michaelflisar.tests.tests.fastAdapter
 
 import android.os.Bundle
 import android.view.LayoutInflater

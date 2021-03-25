@@ -1,4 +1,4 @@
-package com.michaelflisar.tests.tests.imageTintTest
+package com.michaelflisar.tests.tests.coil.tinting
 
 import android.graphics.*
 import android.os.Bundle
