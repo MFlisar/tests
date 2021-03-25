@@ -1,6 +1,8 @@
 package com.michaelflisar.tests.tests.coil.display
 
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.michaelflisar.tests.R
 import com.michaelflisar.tests.databinding.DialogAppItemBinding
 import com.michaelflisar.tests.databinding.DialogAppItemSepBinding
@@ -54,9 +58,14 @@ class ImageDisplayFragment : Fragment() {
                         b.tvLabel.text = item.text
                         initText(b.tvLabel)
                         initIcon(b.ivIcon)
+                        initIcon(b.ivIcon2)
                         ImageManager.display(item.icon, b.ivIcon) {
                             //ColorTintTransformation(Color.BLACK)
                         }
+                        Glide
+                                .with(b.ivIcon2)
+                                .load(item.icon)
+                                .into(b.ivIcon2)
                         b.root.setOnClickListener {
                             onClick(item)
                         }

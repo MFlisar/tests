@@ -2,28 +2,29 @@ package com.michaelflisar.tests.tests.coil
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.widget.ImageView
 import coil.*
 import coil.request.ImageRequest
 import coil.request.ImageResult
 import coil.target.ViewTarget
 import coil.util.CoilUtils
+import coil.util.Logger
 import com.google.android.material.button.MaterialButton
 import com.michaelflisar.lumberjack.L
-import com.michaelflisar.tests.BuildConfig
 import okhttp3.OkHttpClient
 
 object ImageManager {
 
     private val listener = object : ImageRequest.Listener {
         override fun onError(request: ImageRequest, throwable: Throwable) {
-            L.tag("COIL PROBLEM")
+            L.tag("COIL")
                     .e { "Request: ${request.data} | throwable: ${throwable.message}" }
             L.e(throwable)
         }
 
         override fun onSuccess(request: ImageRequest, metadata: ImageResult.Metadata) {
-            L.d { "Request: ${request.data} | metadata: ${metadata.dataSource} | key: ${metadata.memoryCacheKey}" }
+            L.tag("COIL").d { "Request: ${request.data} | metadata: ${metadata.dataSource} | key: ${metadata.memoryCacheKey}" }
         }
     }
 
@@ -85,9 +86,16 @@ object ImageManager {
                 }
                 .apply {
                     // Enable logging to the standard Android log if this is a debug build.
-                    if (BuildConfig.DEBUG) {
-                        //logger(DebugLogger(Log.VERBOSE))
-                    }
+                    logger(object : Logger {
+                        override var level = Log.VERBOSE
+
+                        override fun log(tag: String, priority: Int, message: String?, throwable: Throwable?) {
+                            L.tag("COIL").d { "[$tag] | $priority | $message" }
+                            throwable?.let {
+                                L.tag("COIL").e(throwable)
+                            }
+                        }
+                    })
                 }
                 // Workaround wegen issue: https://github.com/coil-kt/coil/issues/567
                 .bitmapPoolingEnabled(false)
@@ -97,7 +105,7 @@ object ImageManager {
     }
 
     fun clearCache(context: Context, memory: Boolean = true, file: Boolean = true) {
-        L.d { "ImageManager init - clearing cache..." }
+        L.tag("COIL").d { "ImageManager init - clearing cache..." }
         // 1) clear memory cache
         if (memory) {
             val imageLoader = context.imageLoader
