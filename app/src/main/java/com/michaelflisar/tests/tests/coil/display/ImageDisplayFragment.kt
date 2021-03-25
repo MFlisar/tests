@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import coil.request.CachePolicy
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.michaelflisar.tests.R
@@ -61,6 +62,9 @@ class ImageDisplayFragment : Fragment() {
                         initIcon(b.ivIcon2)
                         ImageManager.display(item.icon, b.ivIcon) {
                             //ColorTintTransformation(Color.BLACK)
+
+                            memoryCachePolicy(CachePolicy.DISABLED)
+                            diskCachePolicy(CachePolicy.DISABLED)
                         }
                         Glide
                                 .with(b.ivIcon2)
