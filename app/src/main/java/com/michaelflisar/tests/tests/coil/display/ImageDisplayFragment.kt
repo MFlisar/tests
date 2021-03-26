@@ -9,16 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import coil.request.CachePolicy
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.michaelflisar.tests.R
 import com.michaelflisar.tests.databinding.DialogAppItemBinding
 import com.michaelflisar.tests.databinding.DialogAppItemSepBinding
 import com.michaelflisar.tests.databinding.FragmentImageDisplayTestBinding
 import com.michaelflisar.tests.tests.TestActivity
 import com.michaelflisar.tests.tests.coil.ImageManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class ImageDisplayFragment : Fragment() {
 
@@ -60,6 +66,8 @@ class ImageDisplayFragment : Fragment() {
                         initText(b.tvLabel)
                         initIcon(b.ivIcon)
                         initIcon(b.ivIcon2)
+                        initIcon(b.ivIcon3)
+                        initIcon(b.ivIcon4)
                         ImageManager.display(item.icon, b.ivIcon) {
                             //ColorTintTransformation(Color.BLACK)
 
@@ -70,6 +78,17 @@ class ImageDisplayFragment : Fragment() {
                                 .with(b.ivIcon2)
                                 .load(item.icon)
                                 .into(b.ivIcon2)
+
+                        // we don't care about correctly cancelling in this test here
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val drawable = ContextCompat.getDrawable(context!!, item.icon)!!
+                            val bitmap = drawable.toBitmap() // does work the same way as coils implementation!
+                            withContext(Dispatchers.Main) {
+                                b.ivIcon3.setImageBitmap(bitmap)
+                                b.ivIcon4.setImageDrawable(drawable)
+                            }
+                        }
+
                         b.root.setOnClickListener {
                             onClick(item)
                         }
