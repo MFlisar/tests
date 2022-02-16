@@ -13,23 +13,23 @@ ext {
             fragment        : "1.2.5",
             activity        : "1.1.0",
             appcompat       : "1.2.0",
-            recyclerview    : "1.1.0",
+            recyclerview    : "1.2.1",
             cardview        : "1.0.0",
             viewpager       : "1.0.0",
-            material        : "1.4.0-alpha01",
+            material        : "1.4.0-rc01",
             constraintLayout: "2.0.2",
             preference      : "1.1.0",
-            core            : "1.6.0-alpha01",
+            core            : "1.6.0-beta02",
             lifecycle       : "2.4.0-alpha01"
     ]
 
     versions = [
-            kotlinVersion       : "1.4.31",
+            kotlinVersion       : "1.5.0",
             gradlePlugin        : "4.0.2",
             mavenVersion        : "2.0",
 
             // mine
-            lumberjack          : "4.0.3",
+            lumberjack          : "4.0.4",
 
             // Rx
             rxjava              : "2.2.10",
@@ -42,7 +42,7 @@ ext {
             materialDrawer      : "8.0.0-rc01",
 
             // Coil
-            coil                : "1.1.1",
+            coil                : "1.2.2",
             coilTransformations : "1.0.0",
 
             // Glide
