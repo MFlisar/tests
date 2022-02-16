@@ -10,9 +10,11 @@ I do put as much effort in this report as possible to make my issues as clear an
 
 1) Android Connect IQ app (https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile)
 
-    the app does not open settings of a custom watchface nor does it list the installed custom watchfaces on a Fenix 7X (it does do both with a Fenix 6X) - check out following screenshot from using this app with the Fenix 7X SS:
+* the app does not open settings of a custom watchface nor does it list the installed custom watchfaces on a Fenix 7X (it does do both with a Fenix 6X) - check out following screenshot from using this app with the Fenix 7X SS:
 
-    inside the settings of a custom watchface, the app does not show the help urls that a watchface developer can define (check out the helpUrl field that's defined here: https://developer.garmin.com/connect-iq/core-topics/app-settings/) - this helpUrl did work in the past though and it works inside the pc - check out following screenshot from using this app with the Fenix 6X Pro:
+![Image](Android - Fenix 6x - helpUrl.jpg)
+
+* inside the settings of a custom watchface, the app does not show the help urls that a watchface developer can define (check out the helpUrl field that's defined here: https://developer.garmin.com/connect-iq/core-topics/app-settings/) - this helpUrl did work in the past though and it works inside the pc - check out following screenshot from using this app with the Fenix 6X Pro:
 
 2) Windows App
 
