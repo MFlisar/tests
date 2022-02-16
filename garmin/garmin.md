@@ -1,11 +1,3 @@
-### Information
-
-I tried to solve this issue via the garmin custom support (Product.Support@garmin.com) and in the end they told me to write my issues to the developer support (https://www.garmin.com/en-US/forms/developercontactus/) which very almost for sure isn't the correct place either and which is saying that it won't answer if the issue is not develper relevant. So as I don't know what to do now and would ask the dev guy who is processing this issue to either accept the issue here or to forward it to the correct place.
-
-### Appeal
-
-I do put as much effort in this report as possible to make my issues as clear and reproducable as possible so please, whoever is processing this issue don't point me to some other place and simply close this issue but please make sure that this information is forwarded to someone who can put those issue into their todo list so that the issue may be solved one day.
-
 # BUGS
 
 1) **Android Connect IQ app** (https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile)
