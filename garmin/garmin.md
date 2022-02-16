@@ -6,7 +6,7 @@
 
         <img src="Android_Fenix7X.jpg" width="400">
 
-    * **[BUG2]:** inside the settings of a custom watchface, the app does not show the help urls that a watchface developer can define (check out the helpUrl field that's defined here: https://developer.garmin.com/connect-iq/core-topics/app-settings/) - this helpUrl did work in the past though and it works inside the pc - check out following screenshot from using this app with the Fenix 6X Pro:
+    * **[BUG2]:** inside the settings of a custom watchface, the app does not show the help urls that a watchface developer can define (check out the helpUrl field that's defined here: https://developer.garmin.com/connect-iq/core-topics/app-settings/) - this helpUrl did work in the past though (and it works inside the windows app) - check out following screenshot from using this app with the Fenix 6X Pro:
 
         <img src="Android_Fenix6x_helpUrl.jpg" width="400">
 
