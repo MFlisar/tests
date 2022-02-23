@@ -1,6 +1,8 @@
 # BUGS
 
-1) **Android Connect IQ app** (https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile)
+### Android
+
+Following issues are **Android Connect IQ app** related (https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile)
 
     * **[BUG1]:** the app does not open settings of a custom watchface nor does it list the installed custom watchfaces on a Fenix 7X (it does do both with a Fenix 6X) - check out following screenshot from using this app with the Fenix 7X SS:
 
@@ -10,7 +12,9 @@
 
         <img src="Android_Fenix6x_helpUrl.jpg" width="400">
 
-2) **Windows App**
+### Windows
+
+Following issues are **Windows App** related:
 
     **[BUG3]:** on a Fenix 7X the windows app does not work with settings of a custom watchface either, it does following:
     * it does not show settings translations but does show their resource identifier (which may be readable or may not)
