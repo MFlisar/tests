@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setSupportActionBar(binding.toolbar)
         setContentView(binding.root)
 
         addHeader("Functions (${Definitions.TEST_CASES.count { it is Definitions.TestCase.Function }})")

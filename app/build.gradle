@@ -1,10 +1,9 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
-androidExtensions {
-    experimental = true
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'com.google.devtools.ksp'// version '1.8.10-1.0.9'
 }
 
 android {
@@ -20,15 +19,28 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     defaultConfig {
+
         applicationId "com.michaelflisar.tests"
         minSdkVersion setup.minSdk
         targetSdkVersion setup.targetSdk
         versionCode 1
         versionName "1.0"
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            //arg("room.incremental", "true")
+            //arg("room.expandProjection", "true")
+        }
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
     buildTypes {
         release {
@@ -58,6 +70,16 @@ dependencies {
     implementation "com.google.android.material:material:${androidx.material}"
     implementation "androidx.core:core-ktx:${androidx.core}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${androidx.lifecycle}"
+
+    // ------------------------
+    // Room
+    // ------------------------
+
+    implementation("androidx.room:room-runtime:${androidx.room}")
+    implementation("androidx.room:room-ktx:${androidx.room}")
+
+    ksp("androidx.room:room-compiler:${androidx.room}")
+    //kapt("androidx.room:room-compiler:${androidx.room}")
 
     // ------------------------
     // Rx
@@ -93,6 +115,6 @@ dependencies {
     // ------------------------
 
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
-    annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
+    kapt "com.github.bumptech.glide:compiler:${versions.glide}"
     implementation "jp.wasabeef:glide-transformations:${versions.glideTransformations}"
 }

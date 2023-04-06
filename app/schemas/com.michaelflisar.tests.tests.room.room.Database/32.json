@@ -1,0 +1,261 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 32,
+    "identityHash": "0e19b3445c3c04187f7ac6d03b656834",
+    "entities": [
+      {
+        "tableName": "w_exercise",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`w_exercise_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `index` INTEGER NOT NULL DEFAULT 0, `note` TEXT NOT NULL, `fk_workout` INTEGER NOT NULL, `fk_exercise` INTEGER NOT NULL, `fk_technique` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "w_exercise_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "myIndex",
+            "columnName": "index",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fkWorkout",
+            "columnName": "fk_workout",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fkExercise",
+            "columnName": "fk_exercise",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fkTechnique",
+            "columnName": "fk_technique",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "w_exercise_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_w_exercise_fk_workout",
+            "unique": false,
+            "columnNames": [
+              "fk_workout"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_w_exercise_fk_workout` ON `${TABLE_NAME}` (`fk_workout`)"
+          },
+          {
+            "name": "index_w_exercise_fk_exercise",
+            "unique": false,
+            "columnNames": [
+              "fk_exercise"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_w_exercise_fk_exercise` ON `${TABLE_NAME}` (`fk_exercise`)"
+          },
+          {
+            "name": "index_w_exercise_fk_technique",
+            "unique": false,
+            "columnNames": [
+              "fk_technique"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_w_exercise_fk_technique` ON `${TABLE_NAME}` (`fk_technique`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "w_set",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`w_set_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `note` TEXT NOT NULL, `weight` REAL, `weight_unit` INTEGER NOT NULL, `reps_or_duration` INTEGER NOT NULL, `done` INTEGER NOT NULL, `sub_order` INTEGER NOT NULL, `group_order` INTEGER NOT NULL, `group_type` INTEGER NOT NULL, `fk_exercise` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "w_set_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weightUnit",
+            "columnName": "weight_unit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repsOrDuration",
+            "columnName": "reps_or_duration",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "done",
+            "columnName": "done",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subOrder",
+            "columnName": "sub_order",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mainOrder",
+            "columnName": "group_order",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupType",
+            "columnName": "group_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fkExercise",
+            "columnName": "fk_exercise",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "w_set_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_w_set_fk_exercise",
+            "unique": false,
+            "columnNames": [
+              "fk_exercise"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_w_set_fk_exercise` ON `${TABLE_NAME}` (`fk_exercise`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "w_target_set",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`w_target_set_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `note` TEXT NOT NULL, `weight` REAL, `weight_unit` INTEGER NOT NULL, `reps_or_duration_from` INTEGER NOT NULL, `reps_or_duration_to` INTEGER NOT NULL, `sub_order` INTEGER NOT NULL, `group_order` INTEGER NOT NULL, `group_type` INTEGER NOT NULL, `fk_exercise` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "w_target_set_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weightUnit",
+            "columnName": "weight_unit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repsOrDurationFrom",
+            "columnName": "reps_or_duration_from",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repsOrDurationTo",
+            "columnName": "reps_or_duration_to",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subOrder",
+            "columnName": "sub_order",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mainOrder",
+            "columnName": "group_order",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupType",
+            "columnName": "group_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fkExercise",
+            "columnName": "fk_exercise",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "w_target_set_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_w_target_set_fk_exercise",
+            "unique": false,
+            "columnNames": [
+              "fk_exercise"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_w_target_set_fk_exercise` ON `${TABLE_NAME}` (`fk_exercise`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e19b3445c3c04187f7ac6d03b656834')"
+    ]
+  }
+}

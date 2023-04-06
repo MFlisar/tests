@@ -3,17 +3,20 @@ package com.michaelflisar.tests.tests
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.michaelflisar.tests.R
+import com.michaelflisar.tests.databinding.ActivityMainBinding
+import com.michaelflisar.tests.databinding.ActivityTestBinding
 
 
 class TestActivity : AppCompatActivity() {
 
     companion object {
-        val CONTENT_VIEW_ID = 1
         val KEY_FRAGMENT_CLASS = "fragment"
         val KEY_DISPLAY_HOME_AS_UP = "displayHomeAsUp"
         fun start(context: Context, fragment: Class<*>, displayHomeAsUp: Boolean = true) {
@@ -26,24 +29,25 @@ class TestActivity : AppCompatActivity() {
         }
     }
 
+    private lateinit var binding: ActivityTestBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityTestBinding.inflate(LayoutInflater.from(this))
+        setSupportActionBar(binding.toolbar)
+        setContentView(binding.root)
         val displayHomeAsUp = intent.getBooleanExtra(KEY_DISPLAY_HOME_AS_UP, true)
         if (displayHomeAsUp) {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
-        val frame = FrameLayout(this).apply {
-            id = CONTENT_VIEW_ID
-        }
-        setContentView(frame, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
 
         if (savedInstanceState == null) {
             val fragmentClass = intent.getStringExtra(KEY_FRAGMENT_CLASS)
             val f = Class.forName(fragmentClass).newInstance() as Fragment
             supportFragmentManager
                     .beginTransaction()
-                    .add(CONTENT_VIEW_ID, f)
+                    .add(R.id.content, f)
                     .commit()
         }
     }

@@ -1,31 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:ignore="HardcodedText">
+
+    <TextView
+        style="?textAppearanceTitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:text="autoSizeTextType = uniform" />
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:background="#ff0000"
         android:gravity="center"
-        app:autoSizeMaxTextSize="100dp"
-        app:autoSizeMinTextSize="1dp"
-        app:autoSizeStepGranularity="1dp"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeStepGranularity="1sp"
         app:autoSizeTextType="uniform" />
 
     <TextView
         android:id="@+id/tv2"
-        android:layout_width="20dp"
+        android:layout_width="20sp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:background="#00ff00"
         android:gravity="center"
-        app:autoSizeMaxTextSize="100dp"
-        app:autoSizeMinTextSize="1dp"
-        app:autoSizeStepGranularity="1dp"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeStepGranularity="1sp"
         app:autoSizeTextType="uniform" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="4dp"
+        android:background="?colorOnBackground" />
+
+    <TextView
+        style="?textAppearanceTitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:text="autoSizeTextType = none" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="none" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="20sp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        app:autoSizeMaxTextSize="100sp"
+        app:autoSizeMinTextSize="1sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="none" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="4dp"
+        android:background="?colorOnBackground" />
+
+    <Button
+        android:id="@+id/btChangeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:text="Change Texts" />
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="4dp"
+        android:gravity="center" />
 
 </LinearLayout>
