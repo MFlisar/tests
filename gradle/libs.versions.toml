@@ -1,0 +1,55 @@
+[versions]
+
+gradle = 				            "8.13.0"
+kotlin = 				            "2.2.20"
+ksp =                               "2.2.20-2.0.3"
+desugar =                           "2.1.5"
+
+compose =                           "1.9.0"
+compose-material3 =                 "1.8.2"
+compose-material3-adaptive =        "1.1.2"
+compose-icons =                     "1.7.3"
+
+buildkonfig =                       "0.17.1"
+
+[plugins]
+
+# android
+android-application = 			    { id = "com.android.application", 	                version.ref = "gradle" }
+android-library = 			        { id = "com.android.library", 	                    version.ref = "gradle" }
+
+# kotlin
+kotlin-android = 				    { id = "org.jetbrains.kotlin.android", 			    version.ref = "kotlin" }
+kotlin-parcelize =                  { id = "org.jetbrains.kotlin.plugin.parcelize",     version.ref = "kotlin"  }
+kotlin-multiplatform = 			    { id = "org.jetbrains.kotlin.multiplatform", 	    version.ref = "kotlin" }
+kotlin-compose = 				    { id = "org.jetbrains.kotlin.plugin.compose", 	    version.ref = "kotlin" }
+kotlin-serialization = 			    { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+# compose
+compose =                           { id = "org.jetbrains.compose",                     version.ref = "compose" }
+
+# ksp
+ksp =                                   { id = "com.google.devtools.ksp",                   version.ref = "ksp" }
+
+# buildkonfig
+buildkonfig =                       { id = "com.codingfeline.buildkonfig",              version.ref = "buildkonfig" }
+
+[libraries]
+
+# Android
+desugar =			        	        { module = "com.android.tools:desugar_jdk_libs", 	                            version.ref = "desugar" }
+
+# Compose
+compose-runtime =                       { module = "org.jetbrains.compose.runtime:runtime",                             version.ref = "compose" }
+compose-foundation =                    { module = "org.jetbrains.compose.foundation:foundation",                       version.ref = "compose" }
+compose-ui =                            { module = "org.jetbrains.compose.ui:ui",                                       version.ref = "compose" }
+compose-ui-backhandler =                { module = "org.jetbrains.compose.ui:ui-backhandler",                           version.ref = "compose" }
+compose-ui-tooling =                    { module = "org.jetbrains.compose.ui:ui-tooling",                               version.ref = "compose" }
+compose-components-resources =          { module = "org.jetbrains.compose.components:components-resources",             version.ref = "compose" }
+compose-components-ui-tooling-preview = { module = "org.jetbrains.compose.components:components-ui-tooling-preview",    version.ref = "compose" }
+compose-material3 =                     { module = "org.jetbrains.compose.material3:material3",                         version.ref = "compose-material3" }
+compose-material3-adaptive =            { module = "org.jetbrains.compose.material3.adaptive:adaptive",                 version.ref = "compose-material3-adaptive" }
+
+# Compose Icons
+compose-material-icons-core = 	        { module = "org.jetbrains.compose.material:material-icons-core",                version.ref = "compose-icons" }
+compose-material-icons-extended = 	    { module = "org.jetbrains.compose.material:material-icons-extended",            version.ref = "compose-icons" }

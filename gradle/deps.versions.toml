@@ -1,0 +1,42 @@
+[versions]
+
+# mflisar
+kmp-parcelize =             "1.0.1"
+kmp-library =               "2.2.3"
+
+# Google
+material =                      "1.13.0"
+
+# Compose
+voyager = 				        "1.1.0-beta03"
+vico =					        "2.2.1"
+
+# ---------
+# plugins
+# ---------
+
+[plugins]
+
+# mflisar
+kmplibrary-buildplugin =                        { id = "io.github.mflisar.kmp-library.plugins-build-gradle",                        version.ref = "kmp-library" }
+kmplibrary-projectplugin =                      { id = "io.github.mflisar.kmp-library.plugins-project-gradle",                      version.ref = "kmp-library" }
+
+# ---------
+# libraries
+# ---------
+
+[libraries]
+
+# mflisar
+kmp-parcelize =                                 { module = "io.github.mflisar.parcelize:library", 	                                version.ref = "kmp-parcelize" }
+
+# Google
+material =                                      { module = "com.google.android.material:material", 	                                version.ref = "material" }
+
+# Compose
+voyager-navigator = 		                    { module = "cafe.adriel.voyager:voyager-navigator", 						        version.ref = "voyager" }
+voyager-bottomsheet = 		                    { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", 			        version.ref = "voyager" }
+voyager-tabs = 				                    { module = "cafe.adriel.voyager:voyager-tab-navigator", 					        version.ref = "voyager" }
+voyager-transitions = 		                    { module = "cafe.adriel.voyager:voyager-transitions", 						        version.ref = "voyager" }
+vico = 						                    { module = "com.patrykandpatrick.vico:multiplatform",                               version.ref = "vico" }
+vico-m3 = 						                { module = "com.patrykandpatrick.vico:multiplatform-m3",                            version.ref = "vico" }

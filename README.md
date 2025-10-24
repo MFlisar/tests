@@ -1,2 +1,3 @@
-# tests
+# Tests
+
 Demonstrates issues/bugs/whatever...
