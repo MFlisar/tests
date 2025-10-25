@@ -1,9 +1,7 @@
 package com.michaelflisar.tests.core
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -86,17 +84,15 @@ fun RootContent(
 }
 
 @Composable
-private fun TestSelector(tests: List<Test>, currentTest: MutableState<Test?>) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(all = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-
+private fun TestSelector(
+    tests: List<Test>,
+    currentTest: MutableState<Test?>,
+) {
+    RootScrollableColumn {
         Text(
             text = "Select a test:", style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.fillMaxWidth().padding(all = 8.dp),
         )
-
         tests.forEach { test ->
             Button(
                 onClick = { currentTest.value = test },

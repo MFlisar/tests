@@ -109,7 +109,7 @@ fun LineChartMulti(
     // trying to zoom out to the full range
     LaunchedEffect(range) {
         if (range != null) {
-            println("zoom x range: $range | span: ${range.span}")
+            println("zoom range: $range => span: ${range.span}")
             zoomState.zoom(Zoom.max(Zoom.x(range.span), Zoom.Content))
         }
     }

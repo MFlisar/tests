@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.parcelize.Parcelize
+import com.michaelflisar.tests.core.RootScrollableColumn
 import com.michaelflisar.tests.core.classes.Test
 import com.michaelflisar.tests.vico.charts.LineChart
 import com.michaelflisar.tests.vico.classes.Point
@@ -28,16 +29,20 @@ object TestVico : Test {
 
     @Composable
     override fun Content() {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
+        RootScrollableColumn {
 
             DemoListRegion("Content 1", 200.dp)
+
+            LineChart(
+                modifier = Modifier.height(200.dp),
+                xAxisLabel = {
+                    val date = LocalDate.fromEpochDays(it.toInt())
+                    date.toString()
+                },
+                values = values,
+                range = dateRange
+            )
+
             DemoListRegion("Content 2", 300.dp)
 
             LineChart(
@@ -54,7 +59,6 @@ object TestVico : Test {
             DemoListRegion("Content 4", 300.dp)
             DemoListRegion("Content 5", 100.dp)
 
-            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
