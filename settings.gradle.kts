@@ -51,6 +51,7 @@ include(":app:modules")
 
 include(":app:modules:core")
 include(":app:modules:test-vico")
+include(":app:modules:test-drag-drop")
 
 // --------------
 // App

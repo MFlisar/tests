@@ -104,6 +104,7 @@ kotlin {
             // modules
             implementation(project(":app:modules:core"))
             implementation(project(":app:modules:test-vico"))
+            implementation(project(":app:modules:test-drag-drop"))
 
             // voyager
             implementation(deps.voyager.navigator)

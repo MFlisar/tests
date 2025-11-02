@@ -5,11 +5,12 @@ kmp-parcelize =             "1.0.1"
 kmp-library =               "2.2.3"
 
 # Google
-material =                      "1.13.0"
+material =                  "1.13.0"
 
 # Compose
-voyager = 				        "1.1.0-beta03"
-vico =					        "2.2.1"
+voyager = 				    "1.1.0-beta03"
+vico =					    "2.2.1"
+reorderable = 			    "3.0.0"
 
 # ---------
 # plugins
@@ -40,3 +41,4 @@ voyager-tabs = 				                    { module = "cafe.adriel.voyager:voyager-t
 voyager-transitions = 		                    { module = "cafe.adriel.voyager:voyager-transitions", 						        version.ref = "voyager" }
 vico = 						                    { module = "com.patrykandpatrick.vico:multiplatform",                               version.ref = "vico" }
 vico-m3 = 						                { module = "com.patrykandpatrick.vico:multiplatform-m3",                            version.ref = "vico" }
+reorderable = 				                    { module = "sh.calvin.reorderable:reorderable", 							        version.ref = "reorderable" }
